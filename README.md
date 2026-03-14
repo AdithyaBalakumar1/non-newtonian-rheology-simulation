@@ -30,7 +30,9 @@ using scientific plotting tools and an interactive dashboard.
 Used to represent **shear-thinning** and **shear-thickening fluids**.
 
 ---
+### Parameter Fitting Example
 
+![Power Law Fit](results/powerlaw_fit.png)
 ### Bingham Plastic Model
 
 [

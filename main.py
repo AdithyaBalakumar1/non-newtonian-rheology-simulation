@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+from parameter_fitting import fit_power_law
 from rheology_models import power_law, bingham_plastic, herschel_bulkley
 from visualization import plot_rheology, plot_viscosity
 from pipe_flow import plot_velocity_profile
@@ -40,3 +40,4 @@ plot_velocity_profile()
 df.to_csv("results/simulation_results.csv",index=False)
 
 print("Simulation finished.")
+fit_power_law()
