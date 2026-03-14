@@ -173,3 +173,24 @@ https://github.com/AdithyaBalakumar1
 # non-newtonian-rheology-simulation
 Python-based simulation of non-Newtonian fluid rheology including Power Law, Bingham Plastic, and Herschel–Bulkley models with visualization, viscosity analysis, pipe flow velocity profiles, and an interactive Dash simulator.
 >>>>>>> 7911ad5f683a0272bf165b6ef7cfb999e2855e9b
+
+## Simulation Results
+
+### Rheology Curve
+Shear stress vs shear rate for different non-Newtonian models.
+
+![Rheology Curve](results/rheology_curve.png)
+
+---
+
+### Viscosity Curve
+Apparent viscosity variation with shear rate.
+
+![Viscosity Curve](results/viscosity_curve.png)
+
+---
+
+### Pipe Flow Velocity Profile
+Velocity distribution for a power-law fluid in laminar pipe flow.
+
+![Pipe Flow Velocity](results/pipe_velocity_profile.png)
