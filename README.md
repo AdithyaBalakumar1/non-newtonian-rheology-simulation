@@ -196,3 +196,9 @@ Apparent viscosity variation with shear rate.
 Velocity distribution for a power-law fluid in laminar pipe flow.
 
 ![Pipe Flow Velocity](results/pipe_velocity_profile.png)
+
+### 2D Velocity Field Simulation
+
+Velocity distribution inside a circular pipe for a power-law fluid.
+
+![Velocity Field](results/velocity_field.png)
