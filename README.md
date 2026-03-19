@@ -60,28 +60,54 @@ A generalized model combining **yield stress and power-law behaviour**.
 
 * Rheology curve simulation (shear stress vs shear rate)
 * Apparent viscosity analysis
-* Non-Newtonian pipe flow velocity profile
-* Interactive rheology simulator (Dash dashboard)
-* Export of simulation data
-* Visualization of results
+* Non-Newtonian pipe flow velocity profiles (Power Law, Bingham Plastic, Herschel-Bulkley)
+* Numerical vs analytical validation for power-law pipe flow
+* Multi-model parameter fitting with RMSE, R², AIC, BIC metrics
+* Interactive rheology simulator (Dash dashboard) with all three models
+* Markdown report generation
+* Export of simulation data to CSV
 
 ---
 
 ## Project Structure
 
 ```
-non-newtonian-rheology-simulation
+non-newtonian-rheology-simulation/
 │
-├── main.py
-├── rheology_models.py
-├── visualization.py
-├── pipe_flow.py
-├── dashboard.py
-├── results
-│   ├── rheology_curve.png
-│   ├── viscosity_curve.png
-│   └── pipe_velocity_profile.png
-└── requirements.txt
+├── nonnewtonian/               # Core package
+│   ├── models/                 # Rheology model classes
+│   │   ├── base.py             # Abstract RheologyModel base class
+│   │   ├── power_law.py        # PowerLaw model
+│   │   ├── bingham.py          # BinghamPlastic model
+│   │   └── herschel_bulkley.py # HerschelBulkley model
+│   ├── flow/                   # Flow solvers
+│   │   ├── pipe_steady.py      # Steady pipe flow solver + validation
+│   │   └── dimensionless.py    # Dimensionless groups (Metzner-Reed Re)
+│   ├── fitting/                # Parameter fitting
+│   │   ├── datasets.py         # CSV data loader
+│   │   ├── metrics.py          # RMSE, R², AIC, BIC
+│   │   └── fitters.py          # Multi-model curve fitting
+│   ├── viz/
+│   │   └── plots.py            # Scientific plotting functions
+│   └── reporting/
+│       └── report.py           # Markdown report generator
+│
+├── scripts/
+│   ├── run_rheology.py         # Main simulation script
+│   ├── fit_from_csv.py         # Standalone CSV fitting tool
+│   └── run_dashboard.py        # Launch Dash dashboard
+│
+├── tests/
+│   ├── test_models.py          # Model and pipe flow tests
+│   └── test_fitting.py         # Fitting tests
+│
+├── data/
+│   └── rheology_experiment.csv
+├── results/                    # Generated plots and reports
+├── main.py                     # Backward-compatible entry point
+├── dashboard.py                # Upgraded Dash dashboard
+├── requirements.txt
+└── README.md
 ```
 
 ---
@@ -112,7 +138,13 @@ pip install -r requirements.txt
 
 ## Running the Simulation
 
-Run the rheology simulation:
+Run the full rheology simulation (generates plots, CSV, and a Markdown report):
+
+```
+python scripts/run_rheology.py
+```
+
+Or using the backward-compatible entry point:
 
 ```
 python main.py
@@ -120,17 +152,34 @@ python main.py
 
 This generates:
 
-* Rheology curves
-* Viscosity curves
-* Pipe velocity profile
+* Rheology curves for all three models
+* Apparent viscosity curves
+* Steady pipe flow profiles (velocity, shear stress, apparent viscosity)
+* Numerical vs analytical validation plot for power-law flow
+* Model fitting results (if `data/rheology_experiment.csv` is present)
+* Markdown report in `results/<run_id>/report.md`
 
 Results are saved in the **results/** directory.
+
+---
+
+## Fitting Models to Experimental Data
+
+```
+python scripts/fit_from_csv.py data/rheology_experiment.csv --save results/model_fits.png
+```
 
 ---
 
 ## Interactive Rheology Dashboard
 
 Launch the simulator:
+
+```
+python scripts/run_dashboard.py
+```
+
+Or directly:
 
 ```
 python dashboard.py
@@ -142,7 +191,15 @@ Open in browser:
 http://127.0.0.1:8050/
 ```
 
-The dashboard allows real-time adjustment of rheological parameters.
+The dashboard allows real-time adjustment of rheological parameters for all three models.
+
+---
+
+## Running Tests
+
+```
+pytest tests/ -v
+```
 
 ---
 
@@ -171,10 +228,7 @@ Adithya Balakumar
 GitHub:
 https://github.com/AdithyaBalakumar1
 
-=======
-# non-newtonian-rheology-simulation
-Python-based simulation of non-Newtonian fluid rheology including Power Law, Bingham Plastic, and Herschel–Bulkley models with visualization, viscosity analysis, pipe flow velocity profiles, and an interactive Dash simulator.
->>>>>>> 7911ad5f683a0272bf165b6ef7cfb999e2855e9b
+---
 
 ## Simulation Results
 
